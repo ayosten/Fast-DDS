@@ -175,10 +175,11 @@ static int private_key_password_callback(
 
     int returnedValue = static_cast<int>(strlen(password));
 
-    if (returnedValue > bufsize)
-    {
-        returnedValue = bufsize;
-    }
+    // XXX : Bug 1 : Buffer overflow 
+    // if (returnedValue > bufsize)
+    // {
+    //     returnedValue = bufsize;
+    // }
 
     memcpy(buf, password, returnedValue);
     return returnedValue;

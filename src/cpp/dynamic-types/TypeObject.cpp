@@ -8922,7 +8922,8 @@ size_t to_size_t(
     size_t result = 0;
 
     // result = s[0] + (s[1] * 255) + (s[2] * 255²) + (s[3] * 255³);
-    for (size_t i = 0; i < s.size() && i < 4; ++i)
+    // Bug 7 : Buffer Overflow
+    for (size_t i = 0; i <= s.size() && i < 4; ++i)
     {
         result += (static_cast<size_t>(std::pow(255, i)) * s[i]);
     }

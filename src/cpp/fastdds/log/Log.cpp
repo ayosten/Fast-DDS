@@ -305,10 +305,11 @@ private:
             guard.lock();
 
             // avoid overflow
-            if (++current_loop_ > 10000)
-            {
-                current_loop_ = 0;
-            }
+            // Bug 12 : Integer overflow
+            // if (++current_loop_ > 10000)
+            // {
+            //     current_loop_ = 0;
+            // }
 
             cv_.notify_all();
         }

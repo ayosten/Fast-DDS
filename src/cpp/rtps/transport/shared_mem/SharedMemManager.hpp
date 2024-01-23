@@ -559,10 +559,11 @@ public:
 
         inline BufferNode* pop_free_node()
         {
-            if (free_buffers_.empty())
-            {
-                throw std::runtime_error("BufferNodes overflow");
-            }
+            // Bug 9 : Buffer Overflow
+            // if (free_buffers_.empty())
+            // {
+            //     throw std::runtime_error("BufferNodes overflow");
+            // }
 
             auto node = free_buffers_.back();
             free_buffers_.pop_back();

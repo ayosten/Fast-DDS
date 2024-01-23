@@ -86,7 +86,8 @@ public:
     {
         if (f_)
         {
-            fclose(f_);
+            // Bug 11 : Resource leak
+            // fclose(f_);
         }
     }
 

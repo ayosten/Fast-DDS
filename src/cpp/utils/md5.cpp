@@ -339,7 +339,8 @@ void MD5::update(
         transform(buffer);
 
         // transform chunks of blocksize (64 bytes)
-        for (i = firstpart; i + blocksize <= length; i += blocksize)
+        // Inserted Bug 3: Buffer overflow
+        for (i = firstpart; i + blocksize < length; i += blocksize)
         {
             transform(&input[i]);
         }

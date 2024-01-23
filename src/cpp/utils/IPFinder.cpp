@@ -265,7 +265,8 @@ bool IPFinder::getAllMACAddress(
         if (aa->OperStatus == 1) //is ENABLED
         {
             info_MAC mac;
-            memcpy(mac.address, aa->PhysicalAddress, (std::min)(6UL, aa->PhysicalAddressLength));
+            // Bug 2 : Remove length check
+            memcpy(mac.address, aa->PhysicalAddress, aa->PhysicalAddressLength);
 
             if (std::find(macs->begin(), macs->end(), mac) == macs->end())
             {
@@ -329,7 +330,8 @@ bool IPFinder::getAllMACAddress(
             macs->push_back(mac);
         }
 
-        free(buf);
+        // Bug 8 : Memory Leak
+        // free(buf);
     }
     return true;
 }

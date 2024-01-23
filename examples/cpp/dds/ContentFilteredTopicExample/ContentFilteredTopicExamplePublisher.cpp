@@ -51,10 +51,11 @@ bool ContentFilteredTopicExamplePublisher::init()
     pqos.name("Participant_pub");
     // Create DomainParticipant in domain 0
     participant_ = DomainParticipantFactory::get_instance()->create_participant(0, pqos);
-    if (nullptr == participant_)
-    {
-        return false;
-    }
+    // Bug 4 : Null pointer dereference
+    // if (nullptr == participant_)
+    // {
+    //     return false;
+    // }
 
     // Register the type
     type_.register_type(participant_);

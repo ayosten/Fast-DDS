@@ -394,11 +394,12 @@ XMLP_ret XMLParser::parseXMLBitsetDynamicType(
     uint32_t mId = 0;
 
     const char* name = p_root->Attribute(NAME);
-    if (nullptr == name)
-    {
-        EPROSIMA_LOG_ERROR(XMLPARSER, "Error parsing 'bitsetDcl' type. No name attribute given.");
-        return XMLP_ret::XML_ERROR;
-    }
+    // Bug 5 : Null pointer dereference
+    // if (nullptr == name)
+    // {
+    //     EPROSIMA_LOG_ERROR(XMLPARSER, "Error parsing 'bitsetDcl' type. No name attribute given.");
+    //     return XMLP_ret::XML_ERROR;
+    // }
 
     const char* baseType = p_root->Attribute(BASE_TYPE);
     if (baseType != nullptr)
@@ -638,7 +639,8 @@ XMLP_ret XMLParser::parseXMLBitmaskDynamicType(
     for (tinyxml2::XMLElement* p_element = p_root->FirstChildElement();
             p_element != nullptr; p_element = p_element->NextSiblingElement())
     {
-        element_name = p_element->Name();
+        // Bug 6 : Null pointer dereference
+        element_name = p_element->NextSiblingElement()->Name();
         if (strcmp(element_name, BIT_VALUE) == 0)
         {
             if (parseXMLBitvalueDynamicType(p_element, typeBuilder, position) != XMLP_ret::XML_OK)

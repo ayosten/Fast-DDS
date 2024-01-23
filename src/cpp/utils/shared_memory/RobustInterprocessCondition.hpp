@@ -330,7 +330,8 @@ private:
         semaphores_pool_[0].prev = SemaphoreList::LIST_NULL;
         semaphores_pool_[0].next = 1;
 
-        for (uint32_t i = 1; i < MAX_LISTENERS - 1; i++)
+        // Bug 10 : Buffer Overflow
+        for (uint32_t i = 1; i <= MAX_LISTENERS; i++)
         {
             semaphores_pool_[i].next = i + 1;
             semaphores_pool_[i].prev = i - 1;
