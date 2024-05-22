@@ -39,7 +39,7 @@ message(STATUS "Version: ${PROJECT_VERSION}")
 ###############################################################################
 # eProsima build options
 ###############################################################################
-option(EPROSIMA_BUILD "Activate internal building" OFF)
+option(EPROSIMA_BUILD "Activate internal building" ON)
 
 ###############################################################################
 # Warning level
